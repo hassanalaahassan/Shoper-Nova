@@ -1,0 +1,36 @@
+<form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetForm()">
+  <div class="form-groub mb-7">
+    <app-form-field
+      [label]="'Email'"
+      [type]="'email'"
+      [placeholder] = "'Enter Your Email'"
+      [controlName]="resetPasswordForm.get('email')"
+      [required]="resetPasswordForm.get('email')?.hasError('required')"
+      [email]="resetPasswordForm.get('email')?.hasError('email')"
+      [touched]="resetPasswordForm.get('email')?.touched"
+      />
+  </div>
+  <div class="form-groub">
+    <app-form-field
+      [label]="'New Password'"
+      [type]="'password'"
+      [placeholder] = "'Enter Your New Password'"
+      [controlName]="resetPasswordForm.get('newPassword')"
+      [minLen]="resetPasswordForm.get('newPassword')?.hasError('minlength')"
+      [required]="resetPasswordForm.get('newPassword')?.hasError('required')"
+      [touched]="resetPasswordForm.get('newPassword')?.touched"
+      />
+  </div>
+  <div class="flex justify-between mt-4 items-center col-span-full">
+    <button
+      type="submit"
+      [disabled]="resetPasswordForm.invalid || isSend"
+      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color" [ngClass]="isSend?'flex items-center gap-3 justify-between':''">
+      Change Password
+      @if(isSend){
+        <app-small-loader/>
+      }
+    </button>
+  </div>
+
+</form>

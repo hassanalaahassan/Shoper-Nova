@@ -5,11 +5,13 @@ import { AuthService } from '../../../Services/auth.service';
 import { Router } from '@angular/router';
 import { IRegister } from '../../../shared/interfaces/auth';
 import { ISignupResponse } from '../../../shared/interfaces/api';
+import { CommonModule } from '@angular/common';
+import { SmallLoaderComponent } from "../../../shared/shared-components/small-loader/small-loader.component";
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
-  imports: [FormFieldComponent,ReactiveFormsModule],
+  imports: [FormFieldComponent, ReactiveFormsModule, CommonModule, SmallLoaderComponent],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss'
 })
@@ -39,13 +41,16 @@ export class RegisterFormComponent implements OnInit {
   }
   submitRegister():void{
     if (!this.isSend && this.registerForm.valid) {
+      this.isSend = !this.isSend
       this.authService.register(this.registerForm.value as IRegister).subscribe({
         next:(response:ISignupResponse)=>{
           if (response.token) {
             this.goToLoginPage()
           }
         },
-        complete:()=>this.isSend = !this.isSend
+        error:(err)=>{
+          this.isSend = !this.isSend
+        },
       })
     }
   }

@@ -4,6 +4,10 @@ export interface ISignupResponse{
   token:string
   user:IUser
 }
+export interface IOtpResponse{
+  statusMsg:string
+  message:string
+}
 export interface IUser{
   name:string
   email:string

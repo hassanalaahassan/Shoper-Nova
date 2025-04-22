@@ -1,0 +1,21 @@
+<form [formGroup]="otpForm" (ngSubmit)="onOtpSubmit()">
+  <app-form-field
+    [label]="'OTP'"
+    [type]="'text'"
+    [placeholder] = "'Enter OTP'"
+    [controlName]="otpForm.get('resetCode')"
+    [required]="otpForm.get('resetCode')?.hasError('required')"
+    [touched]="otpForm.get('resetCode')?.touched"
+  />
+<div class="flex justify-between mt-4 items-center col-span-full">
+  <button
+    type="submit"
+    [disabled]="otpForm.invalid || isRequestSend"
+    class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color" [ngClass]="isRequestSend?'flex items-center gap-3 justify-between':''">
+    Submit OTP
+    @if(isRequestSend){
+      <app-small-loader/>
+    }
+  </button>
+</div>
+</form>

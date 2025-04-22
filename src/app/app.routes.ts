@@ -2,11 +2,17 @@ import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from '../Layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from '../Pages/Auth-Pages/login/login.component';
 import { RegisterComponent } from '../Pages/Auth-Pages/register/register.component';
+import { ResetPasswordComponent } from '../Pages/Auth-Pages/reset-password/reset-password.component';
+import { ChangePasswordComponent } from '../Pages/Auth-Pages/change-password/change-password.component';
+import { changePasswordGuard } from '../shared/guards/change-password.guard';
+import { MainLayoutComponent } from '../Layouts/main-layout/main-layout.component';
+import { HomeComponent } from '../Pages/home/home.component';
+import { authGuard } from '../shared/guards/auth.guard';
 
 export const routes: Routes = [
 
   {
-    path:"",
+    path:'',
     component:AuthLayoutComponent,
     children:[
       {
@@ -24,6 +30,28 @@ export const routes: Routes = [
         path:"register",
         component:RegisterComponent,
         data:{title:"Register"}
+      },
+      {
+        path:"passReset",
+        component:ResetPasswordComponent,
+        data:{title:"Reset Password"}
+      },
+      {
+        path:"passChange",
+        canActivate:[changePasswordGuard],
+        component:ChangePasswordComponent,
+        data:{title:"Change Password"}
+      }
+    ]
+  },
+  {
+    path:'',
+    component:MainLayoutComponent,
+    canActivate:[authGuard],
+    children:[
+      {
+        path:'home',
+        component:HomeComponent
       }
     ]
   }

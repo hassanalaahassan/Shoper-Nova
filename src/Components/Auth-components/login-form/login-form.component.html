@@ -25,13 +25,21 @@
     <button
       type="submit"
       [disabled]="loginForm.invalid || isSend"
-      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color">
-      Login
+      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color" [ngClass]="isSend?'flex items-center gap-3 justify-between':''">
+      Sign In
+      @if(isSend){
+        <app-small-loader/>
+      }
     </button>
     <small
     (click)="goToRegisterPage()"
     class="text-main-color font-sans font-bold cursor-pointer">
       Create new account ?
     </small>
+  </div>
+  <div class="col-span-full text-center font-sans mt-4 sm:mt-6 cursor-pointer" (click)="goToResetPage()">
+    <p class="text-main-color">
+      Forget Your Password ?
+    </p>
   </div>
 </form>

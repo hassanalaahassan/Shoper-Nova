@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ClinetApiService } from './clinet-api.service';
 import { LocalstorageService } from './localstorage.service';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { ILogin, IRegister } from '../shared/interfaces/auth';
+import { ILogin, IRegister, IReset } from '../shared/interfaces/auth';
+import { ISignupResponse, IUser } from '../shared/interfaces/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  currentUser:BehaviorSubject<IUser> = new BehaviorSubject({} as IUser)
+
   constructor(
     private clinet:ClinetApiService,
     private local:LocalstorageService,
@@ -20,6 +24,28 @@ export class AuthService {
   register(user:IRegister):Observable<any>{
     return this.clinet.postMethod("auth/signup",user)
   }
+  sendOtp(email:string):Observable<any>{
+    return this.clinet.postMethod("auth/forgotPasswords",email)
+  }
+  submitOtp(otp:string):Observable<any>{
+    return this.clinet.postMethod("auth/verifyResetCode",otp)
+  }
+  changePassword(newPass:IReset):Observable<any>{
+    return this.clinet.putMethod('auth/resetPassword',newPass)
+  }
+  setCurrentUser(user:IUser):void{
+    this.currentUser.next(user)
+  }
+  getCurrentUser():IUser{
+    let user = {} as IUser
+    this.currentUser.subscribe({
+      next:(response:IUser)=>{
+          user = response
+      }
+    })
+    return user
+  }
+
   matchPasswords(passwordField: string, confirmField: string): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const password = formGroup.get(passwordField)?.value;

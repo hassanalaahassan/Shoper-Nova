@@ -12,4 +12,7 @@ export class LocalstorageService {
   getItemIntoLocalStorage(key:string):any{
     return JSON.parse(localStorage.getItem(key)!)
   }
+  removeItemFormLocalStorage(key:string):any{
+    localStorage.removeItem(key)
+  }
 }

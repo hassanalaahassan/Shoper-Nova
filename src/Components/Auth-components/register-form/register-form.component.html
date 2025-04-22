@@ -2,7 +2,7 @@
     [formGroup]="registerForm"
     (ngSubmit)="submitRegister()"
     class="grid grid-cols-12 mt-3 md:mt-8 gap-0 sm:gap-4" >
-  <div class="form-groub col-span-12 md:col-span-6 mb-7">
+  <div class="form-groub col-span-12 md:col-span-6 mb-4 sm:mb-7">
     <app-form-field
       [label]="'User Name'"
       [type]="'text'"
@@ -13,7 +13,7 @@
       [pattern]="registerForm.get('name')?.hasError('pattern')"
       />
   </div>
-  <div class="form-groub col-span-12 md:col-span-6 mb-7">
+  <div class="form-groub col-span-12 md:col-span-6 mb-4 sm:mb-7">
     <app-form-field
       [label]="'User Number'"
       [type]="'tel'"
@@ -24,7 +24,7 @@
       [phone]="registerForm.get('phone')?.hasError('pattern')"
       />
   </div>
-  <div class="form-groub col-span-12 mb-7">
+  <div class="form-groub col-span-12 mb-4 sm:mb-7">
     <app-form-field
       [label]="'Email'"
       [type]="'email'"
@@ -35,7 +35,7 @@
       [touched]="registerForm.get('email')?.touched"
       />
   </div>
-  <div class="form-groub col-span-12 md:col-span-6">
+  <div class="form-groub col-span-12 mb-4 sm:mb-7 md:col-span-6">
     <app-form-field
       [label]="'Password'"
       [type]="'password'"
@@ -58,16 +58,19 @@
       />
   </div>
 
-  <div class="flex justify-between mt-4 items-center flex-col sm:flex-row col-span-full">
+  <div class="flex justify-between mt-4 items-center col-span-full">
     <button
       type="submit"
       [disabled]="this.registerForm.invalid || isSend"
-      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color">
-      Create Account
+      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color" [ngClass]="isSend?'flex items-center gap-3 justify-between':''">
+      Sign Up
+      @if(isSend){
+        <app-small-loader/>
+      }
     </button>
     <small
       (click)="goToLoginPage()"
-    class="text-main-color font-sans font-bold cursor-pointer mt-3 sm:mt-0">
+    class="text-main-color font-sans font-bold cursor-pointer">
       Already have an account ?
     </small>
   </div>

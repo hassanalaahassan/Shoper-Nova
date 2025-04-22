@@ -4,11 +4,14 @@ import { FormFieldComponent } from "../../../shared/shared-components/form-field
 import { Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
 import { ILogin } from '../../../shared/interfaces/auth';
+import { SmallLoaderComponent } from "../../../shared/shared-components/small-loader/small-loader.component";
+import { CommonModule } from '@angular/common';
+import { ISignupResponse } from '../../../shared/interfaces/api';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [ReactiveFormsModule, FormFieldComponent],
+  imports: [ReactiveFormsModule, FormFieldComponent, SmallLoaderComponent,CommonModule],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
@@ -31,23 +34,25 @@ export class LoginFormComponent {
     if (this.loginForm.valid && !this.isSend ) {
       this.isSend = true
       this.authService.login(this.loginForm.value as ILogin).subscribe({
-        next:(response:any)=>{
+        next:(response:ISignupResponse)=>{
           this.handleLoginSuccess(response)
-        },
-        complete:()=>{
-          this.isSend = false
         }
       })
     }
+    this.isSend = false
+
   }
 
-   handleLoginSuccess(response: any): void {
-    if (response.result) {
-      // this.authService.setCurrentUser(response);
-      // this.router.navigate(['/']);
+   handleLoginSuccess(response:ISignupResponse): void {
+    if (response.message === "success") {
+      this.authService.setCurrentUser(response.user)
+      this.router.navigate(['/home']);
     }
   }
   goToRegisterPage():void{
     this.router.navigateByUrl('/register')
+  }
+  goToResetPage():void{
+    this.router.navigateByUrl('/passReset')
   }
 }

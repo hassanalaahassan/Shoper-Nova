@@ -1,0 +1,22 @@
+<form [formGroup]="resetForm" (ngSubmit)="onFormSubmit()">
+  <app-form-field
+  [label]="'Email'"
+  [type]="'email'"
+  [placeholder] = "'Enter Your Email'"
+  [controlName]="resetForm.get('email')"
+  [required]="resetForm.get('email')?.hasError('required')"
+  [email]="resetForm.get('email')?.hasError('email')"
+  [touched]="resetForm.get('email')?.touched"
+/>
+<div class="mt-4 col-span-full">
+  <button
+    type="submit"
+    [disabled]="resetForm.invalid || isOtpSend"
+    class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color" [ngClass]="isOtpSend?'flex items-center gap-3 justify-between':''">
+    Send OTP
+    @if(isOtpSend){
+      <app-small-loader/>
+    }
+  </button>
+</div>
+</form>
