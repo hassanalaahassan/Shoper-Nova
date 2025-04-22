@@ -1,3 +1,8 @@
-<app-nav-bar/>
-<router-outlet/>
-
+<main class="grid grid-cols-12">
+  <div class="navigation block md:col-span-3 lg:col-span-2">
+    <app-side-bar/>
+  </div>
+  <section class="px-5 py-1 sm:py-4 min-h-dvh col-span-12 md:col-span-9 lg:col-span-10">
+    <router-outlet/>
+  </section>
+</main>

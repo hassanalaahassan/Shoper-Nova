@@ -7,6 +7,7 @@ import { ILogin } from '../../../shared/interfaces/auth';
 import { SmallLoaderComponent } from "../../../shared/shared-components/small-loader/small-loader.component";
 import { CommonModule } from '@angular/common';
 import { ISignupResponse } from '../../../shared/interfaces/api';
+import { LocalstorageService } from '../../../Services/localstorage.service';
 
 @Component({
   selector: 'app-login-form',
@@ -28,6 +29,7 @@ export class LoginFormComponent {
   constructor(
     private authService:AuthService,
     private router:Router,
+    private localstorage:LocalstorageService
   ){}
 
   submitLoginForm():void{
@@ -46,6 +48,7 @@ export class LoginFormComponent {
    handleLoginSuccess(response:ISignupResponse): void {
     if (response.message === "success") {
       this.authService.setCurrentUser(response.user)
+      this.localstorage.setItemIntoLocalStorage("currentUser",response.user)
       this.router.navigate(['/home']);
     }
   }

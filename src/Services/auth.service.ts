@@ -10,14 +10,13 @@ import { ISignupResponse, IUser } from '../shared/interfaces/api';
   providedIn: 'root'
 })
 export class AuthService {
-
   currentUser:BehaviorSubject<IUser> = new BehaviorSubject({} as IUser)
-
   constructor(
     private clinet:ClinetApiService,
     private local:LocalstorageService,
-  ) { }
-
+  ) {
+    this.checkLocalStorage()
+  }
   login(user:ILogin):Observable<any>{
     return this.clinet.postMethod("auth/signin",user)
   }
@@ -38,14 +37,21 @@ export class AuthService {
   }
   getCurrentUser():IUser{
     let user = {} as IUser
+    this.checkLocalStorage()
     this.currentUser.subscribe({
       next:(response:IUser)=>{
+        console.log(response);
+
           user = response
       }
     })
     return user
   }
-
+  checkLocalStorage():void{
+    if (this.local.getItemIntoLocalStorage("currentUser")) {
+      this.setCurrentUser(this.local.getItemIntoLocalStorage("currentUser"))
+    }
+  }
   matchPasswords(passwordField: string, confirmField: string): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const password = formGroup.get(passwordField)?.value;
