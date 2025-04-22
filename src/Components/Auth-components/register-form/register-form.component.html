@@ -1,0 +1,74 @@
+<form
+    [formGroup]="registerForm"
+    (ngSubmit)="submitRegister()"
+    class="grid grid-cols-12 mt-3 md:mt-8 gap-0 sm:gap-4" >
+  <div class="form-groub col-span-12 md:col-span-6 mb-7">
+    <app-form-field
+      [label]="'User Name'"
+      [type]="'text'"
+      [placeholder] = "'Enter Your Name'"
+      [controlName]="registerForm.get('name')"
+      [required]="registerForm.get('name')?.hasError('required')"
+      [touched]="registerForm.get('name')?.touched"
+      [pattern]="registerForm.get('name')?.hasError('pattern')"
+      />
+  </div>
+  <div class="form-groub col-span-12 md:col-span-6 mb-7">
+    <app-form-field
+      [label]="'User Number'"
+      [type]="'tel'"
+      [placeholder] = "'Enter Your Phone Number'"
+      [controlName]="registerForm.get('phone')"
+      [required]="registerForm.get('phone')?.hasError('required')"
+      [touched]="registerForm.get('phone')?.touched"
+      [phone]="registerForm.get('phone')?.hasError('pattern')"
+      />
+  </div>
+  <div class="form-groub col-span-12 mb-7">
+    <app-form-field
+      [label]="'Email'"
+      [type]="'email'"
+      [placeholder] = "'Enter Your Email'"
+      [controlName]="registerForm.get('email')"
+      [required]="registerForm.get('email')?.hasError('required')"
+      [email]="registerForm.get('email')?.hasError('email')"
+      [touched]="registerForm.get('email')?.touched"
+      />
+  </div>
+  <div class="form-groub col-span-12 md:col-span-6">
+    <app-form-field
+      [label]="'Password'"
+      [type]="'password'"
+      [placeholder] = "'Enter Your Password'"
+      [controlName]="registerForm.get('password')"
+      [minLen]="registerForm.get('password')?.hasError('minlength')"
+      [required]="registerForm.get('password')?.hasError('required')"
+      [touched]="registerForm.get('password')?.touched"
+      />
+  </div>
+  <div class="form-groub col-span-12 md:col-span-6">
+    <app-form-field
+      [label]="'Re-Password'"
+      [type]="'password'"
+      [placeholder] = "'Enter Your rePassword'"
+      [controlName]="registerForm.get('rePassword')"
+      [isMatch]="registerForm.get('rePassword')?.hasError('match')"
+      [required]="registerForm.get('rePassword')?.hasError('required')"
+      [touched]="registerForm.get('rePassword')?.touched"
+      />
+  </div>
+
+  <div class="flex justify-between mt-4 items-center flex-col sm:flex-row col-span-full">
+    <button
+      type="submit"
+      [disabled]="this.registerForm.invalid || isSend"
+      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color">
+      Create Account
+    </button>
+    <small
+      (click)="goToLoginPage()"
+    class="text-main-color font-sans font-bold cursor-pointer mt-3 sm:mt-0">
+      Already have an account ?
+    </small>
+  </div>
+</form>

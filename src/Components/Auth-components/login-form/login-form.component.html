@@ -1,0 +1,37 @@
+<form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+  <div class="form-groub mb-7">
+    <app-form-field
+      [label]="'Email'"
+      [type]="'email'"
+      [placeholder] = "'Enter Your Email'"
+      [controlName]="loginForm.get('email')"
+      [required]="loginForm.get('email')?.hasError('required')"
+      [email]="loginForm.get('email')?.hasError('email')"
+      [touched]="loginForm.get('email')?.touched"
+      />
+  </div>
+  <div class="form-groub">
+    <app-form-field
+      [label]="'Password'"
+      [type]="'password'"
+      [placeholder] = "'Enter Your Password'"
+      [controlName]="loginForm.get('password')"
+      [minLen]="loginForm.get('password')?.hasError('minlength')"
+      [required]="loginForm.get('password')?.hasError('required')"
+      [touched]="loginForm.get('password')?.touched"
+      />
+  </div>
+  <div class="flex justify-between mt-4 items-center col-span-full">
+    <button
+      type="submit"
+      [disabled]="loginForm.invalid || isSend"
+      class="capitalize dark-text font-mono bg-[#e6e6fa] px-3 py-2 rounded-lg transition-all hover:text-white hover:bg-main-color">
+      Login
+    </button>
+    <small
+    (click)="goToRegisterPage()"
+    class="text-main-color font-sans font-bold cursor-pointer">
+      Create new account ?
+    </small>
+  </div>
+</form>

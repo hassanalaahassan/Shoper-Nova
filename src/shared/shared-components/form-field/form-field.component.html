@@ -1,0 +1,54 @@
+<div>
+  <label [for]="label" class="block mb-2 ml-1 font-mono text-xl font-medium capitalize light-text">{{label}}</label>
+  <input [type]="type" [name]="label" [id]="label" class="font-mono smooth text-gray-900 text-sm rounded-lg block w-full p-2.5" [placeholder]="placeholder"
+  [ngClass]="{
+    'error': touched && (
+      required ||
+      minLen ||
+      email ||
+      pattern ||
+      phone ||
+      isMatch
+    )
+  }"  [formControl]="controlName" [autocomplete]="'current-'+label"
+  >
+</div>
+<div class="errors flex flex-col gap-2 mt-2">
+  <div class="required flex items-center gap-1">
+    <img [src]="requiredImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="requiredClass" class="text-xs md:text-base">
+      {{label}} is Required
+    </p>
+  </div>
+  <div class="email flex items-center gap-1" *ngIf="email!==undefined">
+    <img [src]="emailImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="emailClass" class="text-xs md:text-base">
+      {{label}} Must be In Formatting Email
+    </p>
+  </div>
+  <div class="password flex items-center gap-1" *ngIf="minLen!==undefined">
+    <img [src]="minLenImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="minLenClass" class="text-xs md:text-base">
+      {{label}} At Least Contain 6 Charcter
+    </p>
+  </div>
+  <div class="password flex items-center gap-1" *ngIf="isMatch!==undefined">
+    <img [src]="isMatchImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="isMatchClass" class="text-xs md:text-base">
+      {{label}} Must Match Password
+    </p>
+  </div>
+  <div class="name flex items-center gap-1" *ngIf="pattern!==undefined">
+    <img [src]="patternImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="patternClass" class="text-xs md:text-base">
+      Must All {{label}} Character
+    </p>
+  </div>
+  <div class="phone flex items-center gap-1" *ngIf="phone!==undefined">
+    <img [src]="phoneImage()" class="w-[18px] md:w-[24px]" alt="check">
+    <p [ngClass]="phoneClass" class="text-xs md:text-base">
+      phone Must Be Like 01xxxxxxxxx
+    </p>
+  </div>
+</div>
+

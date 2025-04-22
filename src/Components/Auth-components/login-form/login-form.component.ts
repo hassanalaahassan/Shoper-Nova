@@ -1,0 +1,53 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormFieldComponent } from "../../../shared/shared-components/form-field/form-field.component";
+import { Router } from '@angular/router';
+import { AuthService } from '../../../Services/auth.service';
+import { ILogin } from '../../../shared/interfaces/auth';
+
+@Component({
+  selector: 'app-login-form',
+  standalone: true,
+  imports: [ReactiveFormsModule, FormFieldComponent],
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss'
+})
+export class LoginFormComponent {
+
+  loginForm:FormGroup = new FormGroup({
+    email: new FormControl('',[Validators.required , Validators.email]),
+    password: new FormControl('',[Validators.required , Validators.minLength(6)])
+  })
+
+  isSend:boolean = false
+
+
+  constructor(
+    private authService:AuthService,
+    private router:Router,
+  ){}
+
+  submitLoginForm():void{
+    if (this.loginForm.valid && !this.isSend ) {
+      this.isSend = true
+      this.authService.login(this.loginForm.value as ILogin).subscribe({
+        next:(response:any)=>{
+          this.handleLoginSuccess(response)
+        },
+        complete:()=>{
+          this.isSend = false
+        }
+      })
+    }
+  }
+
+   handleLoginSuccess(response: any): void {
+    if (response.result) {
+      // this.authService.setCurrentUser(response);
+      // this.router.navigate(['/']);
+    }
+  }
+  goToRegisterPage():void{
+    this.router.navigateByUrl('/register')
+  }
+}
