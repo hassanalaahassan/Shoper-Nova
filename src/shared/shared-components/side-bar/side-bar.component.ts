@@ -1,12 +1,43 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss'] // صحح styleUrl إلى styleUrls
 })
 export class SideBarComponent {
 
+  isSideBarOpen:boolean = false
+
+  @ViewChild('sidebar') sideBar:ElementRef = {} as ElementRef
+  @ViewChild('toggleBtn') toggleBtn!: ElementRef;
+
+
+  toggleSidebar():void{
+    this.isSideBarOpen = !this.isSideBarOpen
+    console.log(this.isSideBarOpen);
+
+  }
+  // @HostListener('document:click', ['$event']) closeSideBar(event:MouseEvent){
+  //   // if (this.isSideBarOpen && ) {
+
+  //   // }
+  //   console.log(this.sideBar.nativeElement ,event.target);
+
+
+  // }
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as Node;
+    const clickedToggleBtn = this.toggleBtn?.nativeElement.contains(target);
+    const clickedInsideSidebar = this.sideBar?.nativeElement.contains(target);
+
+
+    if (this.isSideBarOpen && !clickedInsideSidebar && !clickedToggleBtn) {
+      this.toggleSidebar();
+    }
+  }
 }
