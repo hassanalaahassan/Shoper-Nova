@@ -38,17 +38,19 @@ export class LoginFormComponent {
       this.authService.login(this.loginForm.value as ILogin).subscribe({
         next:(response:ISignupResponse)=>{
           this.handleLoginSuccess(response)
+        },
+        error:(err)=>{
+          this.isSend=false
         }
       })
     }
-    this.isSend = false
-
   }
 
    handleLoginSuccess(response:ISignupResponse): void {
     if (response.message === "success") {
       this.authService.setCurrentUser(response.user)
       this.localstorage.setItemIntoLocalStorage("currentUser",response.user)
+      this.isSend=false
       this.router.navigate(['/home']);
     }
   }
