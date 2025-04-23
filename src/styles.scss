@@ -8,7 +8,6 @@
   --secondry-text-color:#b0b0d0 ;
   --btn-color:#3498db  ;
 }
-button.p-link{
-  background: var(--main-color);
-  color: white;
+ul.p-carousel-indicators{
+  display: none!important;
 }

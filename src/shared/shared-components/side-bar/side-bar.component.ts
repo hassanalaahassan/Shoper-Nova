@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './side-bar.component.html',
-  styleUrl: './side-bar.component.scss'
+  styleUrls: ['./side-bar.component.scss'] // صحح styleUrl إلى styleUrls
 })
 export class SideBarComponent {
 
