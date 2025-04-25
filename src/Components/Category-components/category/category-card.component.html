@@ -1,0 +1,13 @@
+<div class="w-full bg-white border border-violet-200 rounded-lg shadow-sm" [routerLink]="['/category',category._id]">
+  <a>
+      <img class="max-h-96 h-72 md:h-96 w-full rounded-lg bg-cover" [src]="category.image" alt="category image" />
+  </a>
+  <div class="p-5">
+      <a>
+          <h5 class="text-xl font-semibold tracking-tight text-violet-950">{{category.name}}</h5>
+      </a>
+      <div class="flex justify-end">
+          <a class="text-white bg-violet-700 cursor-pointer transition-all hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sub Categories</a>
+      </div>
+  </div>
+</div>

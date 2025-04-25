@@ -1,18 +1,23 @@
-<p-carousel
-    [value]="allCategories"
-    [numVisible]="6"
-    [numScroll]="2"
-    [responsiveOptions]="responsiveOptions">
-        <ng-template let-category pTemplate="item">
-            <div class="p-3 cursor-pointer" >
-              <div class="border border-violet-100 rounded-lg shadow-sm">
-                <a class="rounded-t-lg">
-                    <img class="rounded-xl max-w-56 w-40 h-44 mx-auto p-2" [src]="category.image" [alt]="category.name" />
-                </a>
-                <div class="text-center my-2">
-                    <h5 class="md:text-xl tracking-tight text-violet-300">{{category.name}}</h5>
+<section class="mt-20">
+  <app-section-header
+    [header]="'Our Categories:'"
+  />
+  <p-carousel
+      [value]="allCategories"
+      [numVisible]="6"
+      [numScroll]="2"
+      [responsiveOptions]="responsiveOptions">
+          <ng-template let-category pTemplate="item">
+              <div class="p-3 cursor-pointer" >
+                <div class="border border-violet-100 rounded-lg shadow-sm">
+                  <a class="rounded-t-lg">
+                      <img class="rounded-xl max-w-56 w-40 h-44 mx-auto p-2" [src]="category.image" [alt]="category.name" />
+                  </a>
+                  <div class="text-center my-2">
+                      <h5 class="md:text-xl tracking-tight text-violet-300">{{category.name}}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-        </ng-template>
-</p-carousel>
+          </ng-template>
+  </p-carousel>
+</section>
