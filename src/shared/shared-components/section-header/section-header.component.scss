@@ -1,0 +1,13 @@
+.sec-header{
+  letter-spacing: 1px;
+}
+
+.sec-header::after{
+  content: "";
+  position: absolute;
+  background-color: rgb(129, 58, 177);
+  height: 3px;
+  width: 85%;
+  left: 0;
+  bottom: -8px;
+}

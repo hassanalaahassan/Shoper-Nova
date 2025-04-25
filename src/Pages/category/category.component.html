@@ -1,0 +1,10 @@
+<app-category-header/>
+<div class="grid grid-cols-12  gap-4">
+  @for (sCategory of allCategories; track sCategory._id) {
+    <div class="col-span-12 sm:col-span-6 md:col-span-4">
+      <app-category-card
+        [category]="sCategory"
+      />
+    </div>
+  }
+</div>

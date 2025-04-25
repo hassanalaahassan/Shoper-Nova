@@ -8,6 +8,8 @@ import { changePasswordGuard } from '../shared/guards/change-password.guard';
 import { MainLayoutComponent } from '../Layouts/main-layout/main-layout.component';
 import { HomeComponent } from '../Pages/home/home.component';
 import { authGuard } from '../shared/guards/auth.guard';
+import { CategoryComponent } from '../Pages/category/category.component';
+import { SubCategoriesComponent } from '../Pages/sub-categories/sub-categories.component';
 
 export const routes: Routes = [
 
@@ -51,8 +53,19 @@ export const routes: Routes = [
     children:[
       {
         path:'home',
-        component:HomeComponent
-      }
+        component:HomeComponent,
+        data:{title:'Home'}
+      },
+      {
+        path:'categories',
+        component:CategoryComponent,
+        data:{title:'Categories'}
+      },
+      {
+        path:'category/:id',
+        component:SubCategoriesComponent,
+        data:{title:'Sub Category'}
+      },
     ]
   }
 ];
