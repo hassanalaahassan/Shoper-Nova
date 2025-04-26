@@ -1,1 +1,28 @@
-<app-parent-category/>
+<app-parent-category
+  [parentCategory]="perantCategory"
+/>
+@if (isHide || allSubCategories.length != 0) {
+    <h1
+      class="my-20 text-4xl font-bold text-main-color"
+      >
+        All Sub {{perantCategory.name | titlecase }} Categories
+    </h1>
+}
+<div class="grid grid-cols-12 gap-4">
+  @if (!isHide) {
+    @for (subCategory of allSubCategories; track subCategory._id){
+      <div class="col-span-full sm:col-span-6 md:col-span-4">
+        <app-sub-category
+          [subCategory]="subCategory"
+        />
+      </div>
+    }
+    @empty {
+      <div class="mt-10 md:mt-20 col-span-full text-center text-[#E54887] text-2xl md:text-4xl font-mono font-bold">
+        <p>
+          Sorry But No Sub Categories For {{perantCategory.name | titlecase }} Category
+        </p>
+      </div>
+    }
+  }
+</div>

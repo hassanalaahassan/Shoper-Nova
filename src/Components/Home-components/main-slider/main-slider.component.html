@@ -8,7 +8,7 @@
       [numScroll]="2"
       [responsiveOptions]="responsiveOptions">
           <ng-template let-category pTemplate="item">
-              <div class="p-3 cursor-pointer" >
+              <div class="p-3 cursor-pointer" [routerLink]="['/category',category._id]">
                 <div class="border border-violet-100 rounded-lg shadow-sm">
                   <a class="rounded-t-lg">
                       <img class="rounded-xl max-w-56 w-40 h-44 mx-auto p-2" [src]="category.image" [alt]="category.name" />
