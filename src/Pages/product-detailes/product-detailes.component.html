@@ -1,0 +1,30 @@
+<section class="grid grid-cols-12 gap-3">
+
+  <div class="col-span-full md:col-span-5">
+    <app-image-slider
+    [images]="product().images"
+    />
+  </div>
+  <div class="col-span-full md:col-span-7 mt-5 md:mt-0">
+    <h1 class="text-base sm:text-2xl font-mono font-bold text-secondry-text-color">
+        <span class="font-semibold text-hover-color text-opacity-90">Title : </span>{{product().title}}
+    </h1>
+    <p class="text-sm sm:text-xl font-semibold text-main-color my-5 sm:my-10">
+      <span class="font-semibold text-hover-color text-opacity-90">Description : </span>{{product().description}}
+    </p>
+    <div class="flex items-center justify-between">
+      <span class="bg-violet-100 text-violet-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-xl ">{{product().category.name}}</span>
+
+      <span class="bg-violet-100 text-violet-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-xl ">{{product().brand.name}}</span>
+    </div>
+    <div class="flex items-center justify-between my-5 sm:my-10 ">
+      <span class="text-main-color text-sm font-medium me-2 px-2.5 py-0.5">Price : {{product().price | currency:'EGY ' }}</span>
+
+      <span class="text-main-color text-sm font-medium me-2 px-2.5 py-0.5 flex items-center gap-1">
+        Quan : {{product().quantity}}</span>
+    </div>
+    <button class="bg-violet-700 w-full my-5 sm:my-10 text-white font-extrabold p-2 px-6 rounded-xl hover:bg-violet-500 transition-all">Add To Cart</button>
+  </div>
+
+
+</section>

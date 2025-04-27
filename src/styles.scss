@@ -9,5 +9,26 @@
   --btn-color:#3498db  ;
 }
 ul.p-carousel-indicators{
-  display: none!important;
+  display: none;
+}
+.p-galleria .p-galleria-thumbnail-container{
+  background: var(--hover-color);
+  border-radius: 12px;
+}
+.p-ripple.p-element.p-galleria-thumbnail-next.p-link,
+.p-ripple.p-element.p-galleria-thumbnail-prev.p-link{
+  color: var(--secondry-text-color);
+}
+
+@media screen and (max-width:768px) {
+  .p-galleria .p-galleria-thumbnail-container{
+    max-height: 200px;
+    max-width: 300px;
+    margin: 0 auto;
+    img{
+      width: 100%;
+      max-height: 200px;
+    }
+  }
+
 }

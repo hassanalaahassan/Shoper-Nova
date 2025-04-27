@@ -4,6 +4,7 @@ import { ProductsService } from '../../../Services/products.service';
 import { IProducts } from '../../../shared/interfaces/products';
 import { ProductCardComponent } from "../../../shared/shared-components/product-card/product-card.component";
 import { SlicePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -45,5 +46,4 @@ export class ProductsComponent implements OnInit {
       }
     })
   }
-
 }

@@ -10,13 +10,22 @@ export class ProductsService {
 
   allProducts:BehaviorSubject<IProducts[]> = new BehaviorSubject<IProducts[]>([])
 
-  constructor(private clinetApiService:ClinetApiService) { }
+  constructor(private clinetApiService:ClinetApiService) {
+    this.getAllProducts().subscribe({
+      next:(val)=>{
+        this.allProducts.next(val.data)
+      }
+    })
+  }
 
   getAllProducts(params = ''):Observable<any>{
     return this.clinetApiService.getMethod(`products${params}`)
   }
   sortProductsByRating(products:IProducts[]):IProducts[]{
     return products.sort((a,b)=> b.ratingsAverage - a.ratingsAverage)
+  }
+  getProductById(products:IProducts[],id:string):IProducts|undefined{
+    return products.find((product)=> product._id === id)
   }
 
 }

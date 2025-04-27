@@ -1,5 +1,5 @@
 <div class="w-full bg-violet-800 rounded-3xl text-neutral-300 flex flex-col items-start justify-center gap-3 transition-all hover:bg-violet-900 hover:shadow-2xl hover:shadow-violet-400">
-  <div class="rounded-2xl w-full">
+  <div [routerLink]="['/product',product._id]" class="cursor-pointer rounded-2xl w-full">
     <img [src]="product.imageCover" class="size-full max-h-96 rounded-2xl" [alt]="product.title">
   </div>
   <div class="p-4 w-full">
@@ -25,8 +25,6 @@
         </div>
       </div>
   </div>
-  <button class="bg-violet-700 font-extrabold p-2 px-6 rounded-xl hover:bg-violet-500 transition-colors">Add To Cart</button>
-
-
+  <button class="bg-violet-700 font-extrabold p-2 px-6 rounded-xl hover:bg-violet-500 transition-colors text-white">Add To Cart</button>
   </div>
 </div>

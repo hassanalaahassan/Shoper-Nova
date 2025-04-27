@@ -19,24 +19,12 @@ export class SideBarComponent {
 
   toggleSidebar():void{
     this.isSideBarOpen = !this.isSideBarOpen
-    console.log(this.isSideBarOpen);
-
   }
-  // @HostListener('document:click', ['$event']) closeSideBar(event:MouseEvent){
-  //   // if (this.isSideBarOpen && ) {
-
-  //   // }
-  //   console.log(this.sideBar.nativeElement ,event.target);
-
-
-  // }
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
     const target = event.target as Node;
     const clickedToggleBtn = this.toggleBtn?.nativeElement.contains(target);
     const clickedInsideSidebar = this.sideBar?.nativeElement.contains(target);
-
-
     if (this.isSideBarOpen && !clickedInsideSidebar && !clickedToggleBtn) {
       this.toggleSidebar();
     }
