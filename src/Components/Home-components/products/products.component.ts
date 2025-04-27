@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { ProductsService } from '../../../Services/products.service';
 import { IProducts } from '../../../shared/interfaces/products';
+import { ProductCardComponent } from "../../../shared/shared-components/product-card/product-card.component";
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ SectionHeaderComponent],
+  imports: [SectionHeaderComponent, ProductCardComponent,SlicePipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -24,6 +26,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getProductsFromSubject()
   }
+
   getProductsFromSubject():void{
     this.productsService.allProducts.subscribe({
       next:(response:IProducts[])=>{
@@ -34,6 +37,7 @@ export class ProductsComponent implements OnInit {
       }
     })
   }
+
   getAllProducts():void{
     this.productsService.getAllProducts().subscribe({
       next:(response)=>{
