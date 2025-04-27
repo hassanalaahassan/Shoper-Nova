@@ -10,13 +10,7 @@ export class ProductsService {
 
   allProducts:BehaviorSubject<IProducts[]> = new BehaviorSubject<IProducts[]>([])
 
-  constructor(private clinetApiService:ClinetApiService) {
-    this.getAllProducts().subscribe({
-      next:(val)=>{
-        this.allProducts.next(val.data)
-      }
-    })
-  }
+  constructor(private clinetApiService:ClinetApiService) {}
 
   getAllProducts(params = ''):Observable<any>{
     return this.clinetApiService.getMethod(`products${params}`)
