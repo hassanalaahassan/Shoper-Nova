@@ -11,6 +11,7 @@ import { authGuard } from '../shared/guards/auth.guard';
 import { CategoryComponent } from '../Pages/category/category.component';
 import { SubCategoriesComponent } from '../Pages/sub-categories/sub-categories.component';
 import { ProductDetailesComponent } from '../Pages/product-detailes/product-detailes.component';
+import { ProductsComponent } from '../Pages/products/products.component';
 
 export const routes: Routes = [
 
@@ -71,6 +72,11 @@ export const routes: Routes = [
         path:'product/:id',
         component:ProductDetailesComponent,
         data:{title:'Product Detailes'}
+      },
+      {
+        path:'products',
+        component:ProductsComponent,
+        data:{title:'All Products'}
       },
     ]
   }

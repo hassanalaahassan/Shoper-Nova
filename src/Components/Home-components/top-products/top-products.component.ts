@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { ProductsService } from '../../../Services/products.service';
-import { IProducts } from '../../../shared/interfaces/products';
+import { IProducts, IProductsResponse } from '../../../shared/interfaces/products';
 import { ProductCardComponent } from "../../../shared/shared-components/product-card/product-card.component";
 import { SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-top-products',
   standalone: true,
   imports: [SectionHeaderComponent, ProductCardComponent,SlicePipe],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  templateUrl: './top-products.component.html',
+  styleUrl: './top-products.component.scss'
 })
-export class ProductsComponent implements OnInit {
+export class TopProductsComponent implements OnInit {
 
 
 
@@ -29,20 +29,15 @@ export class ProductsComponent implements OnInit {
   }
 
   getProductsFromSubject():void{
-    this.productsService.allProducts.subscribe({
-      next:(response:IProducts[])=>{
-        if(response.length === 0 ){
-          this.getAllProducts()
+    this.productsService.response.subscribe({
+      next:(response:IProductsResponse)=>{
+        if(response.data == undefined){
+          this.productsService.subscribeForProducts()
         }
-        this.topProducts = this.productsService.sortProductsByRating(response)
-      }
-    })
-  }
-
-  getAllProducts():void{
-    this.productsService.getAllProducts().subscribe({
-      next:(response)=>{
-        this.productsService.allProducts.next(response.data)
+        else
+        {
+          this.topProducts = this.productsService.sortProductsByRating(response.data)
+        }
       }
     })
   }

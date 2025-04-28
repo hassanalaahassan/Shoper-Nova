@@ -25,9 +25,4 @@ export class ImageSliderComponent {
             numVisible: 1
         }
     ];
-    ngOnInit(): void {
-      console.log(this.images);
-
-    }
-
 }

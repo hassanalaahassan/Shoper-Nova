@@ -1,5 +1,18 @@
+
 import { ICategory, ISubcategory } from "./categories"
 
+export interface IProductsResponse {
+  results: number
+  metadata: Metadata
+  data: IProducts[]
+}
+
+export interface Metadata {
+  currentPage: number
+  numberOfPages: number
+  limit: number
+  nextPage: number
+}
 export interface IProducts {
   sold: number
   images: string[]
