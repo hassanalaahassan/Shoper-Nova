@@ -1,5 +1,5 @@
 import { Component, signal, WritableSignal } from '@angular/core';
-import { IProducts } from '../../shared/interfaces/products';
+import { IProducts, IProductsResponse } from '../../shared/interfaces/products';
 import { ProductsService } from '../../Services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { ImageSliderComponent } from "../../Components/Product-detailes/image-slider/image-slider.component";
@@ -26,9 +26,9 @@ export class ProductDetailesComponent {
   }
   getProductDetailes():void{
     this.getProductId()
-    this.productsService.allProducts.subscribe({
-      next:(response:IProducts[])=>{
-        const product = this.productsService.getProductById(response, this.productId);
+    this.productsService.response.subscribe({
+      next:(response:IProductsResponse)=>{
+        const product = this.productsService.getProductById(response.data, this.productId);
         if (product) {
           this.product.set(product);
         } else {
