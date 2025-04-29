@@ -11,7 +11,7 @@ import { IUser } from '../shared/interfaces/api';
 })
 export class AuthService {
   currentUser:BehaviorSubject<IUser> = new BehaviorSubject({} as IUser)
-  token:WritableSignal<string> = signal('')
+  token:WritableSignal<string> = signal("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDhmNWNjM2MzOWVkMWYyODMyOGVhOSIsIm5hbWUiOiJoYXNzYW4iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTk0NjUwMSwiZXhwIjoxNzUzNzIyNTAxfQ.0jA2xqvOkepzGxoVPXYHLHHFuMlVv5RWn5y3v39NbiY")
   constructor(
     private clinet:ClinetApiService,
     private local:LocalstorageService,
@@ -41,8 +41,6 @@ export class AuthService {
     this.checkLocalStorage()
     this.currentUser.subscribe({
       next:(response:IUser)=>{
-        console.log(response);
-
           user = response
       }
     })

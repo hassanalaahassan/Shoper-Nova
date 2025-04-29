@@ -21,6 +21,6 @@ export interface ICart {
 export interface ICartProduct {
   count: number
   _id: string
-  product: IProducts[]
+  product: IProducts
   price: number
 }

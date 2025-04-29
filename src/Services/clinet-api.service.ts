@@ -23,8 +23,8 @@ export class ClinetApiService {
         return this.http.get(`${Api.url}${restOfApi}`)
       }
   }
-  deleteMethod(restOfApi:string):Observable<any>{
-    return this.http.delete(`${Api.url}${restOfApi}`)
+  deleteMethod(restOfApi:string,headers:HttpHeaders):Observable<any>{
+    return this.http.delete(`${Api.url}${restOfApi}`,{headers})
   }
   putMethod(restOfApi:string,body:any,header?:HttpHeaders):Observable<any>{
     return this.http.put(`${Api.url}${restOfApi}`,body,{headers:header})
