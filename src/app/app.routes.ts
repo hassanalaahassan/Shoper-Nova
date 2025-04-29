@@ -12,6 +12,7 @@ import { CategoryComponent } from '../Pages/category/category.component';
 import { SubCategoriesComponent } from '../Pages/sub-categories/sub-categories.component';
 import { ProductDetailesComponent } from '../Pages/product-detailes/product-detailes.component';
 import { ProductsComponent } from '../Pages/products/products.component';
+import { CartComponent } from '../Pages/cart/cart.component';
 
 export const routes: Routes = [
 
@@ -77,6 +78,11 @@ export const routes: Routes = [
         path:'products',
         component:ProductsComponent,
         data:{title:'All Products'}
+      },
+      {
+        path:'cart',
+        component:CartComponent,
+        data:{title:'User Cart'}
       },
     ]
   }

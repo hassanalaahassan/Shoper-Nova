@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { ProductsService } from '../../../Services/products.service';
 import { IProducts, IProductsResponse } from '../../../shared/interfaces/products';
@@ -15,10 +15,9 @@ import { RouterLink } from '@angular/router';
 })
 export class TopProductsComponent implements OnInit {
 
-
+  @Output() modalProduct:EventEmitter<IProducts> = new EventEmitter()
 
   topProducts:IProducts[] = []
-
 
   constructor(private productsService:ProductsService){
   }
@@ -40,5 +39,8 @@ export class TopProductsComponent implements OnInit {
         }
       }
     })
+  }
+  emitProductToModal(product:IProducts):void{
+   this.modalProduct.emit(product)
   }
 }

@@ -1,3 +1,9 @@
+<!-- @if (loaderService.isLoading()) {
+  <div class="bg-black bg-opacity-5 min-h-dvh flex items-center justify-center">
+    <app-loader/>
+  </div>
+}
+@else{ -->
 <main class="grid grid-cols-12">
   <div class="navigation block md:col-span-3 lg:col-span-2">
     <app-side-bar/>
@@ -6,3 +12,5 @@
     <router-outlet/>
   </section>
 </main>
+
+<!-- } -->

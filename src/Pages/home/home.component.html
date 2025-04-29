@@ -4,4 +4,11 @@
 [subImage]="'assets/Images/General/images/shopping-app.svg'"
 />
 <app-main-slider/>
-<app-top-products/>
+<app-top-products
+(modalProduct)="productToShow($event)"
+/>
+<app-modal
+  [product]="product()"
+  [visible]="modalVisable"
+  (closed)="closeModal($event)"
+/>

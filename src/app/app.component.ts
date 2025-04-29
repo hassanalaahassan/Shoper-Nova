@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+import { ModalComponent } from "../shared/shared-components/modal/modal.component";
 
 @Component({
   selector: 'app-root',
   standalone:true,
   templateUrl: './app.component.html',
-  imports:[RouterOutlet],
+  imports: [RouterOutlet, ModalComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {

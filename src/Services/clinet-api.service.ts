@@ -10,8 +10,8 @@ export class ClinetApiService {
 
   constructor(private http:HttpClient) { }
 
-  postMethod(restOfApi:string,body:any):Observable<any>{
-    return this.http.post(`${Api.url}${restOfApi}`,body)
+  postMethod(restOfApi:string,body:any,header?:HttpHeaders):Observable<any>{
+    return this.http.post(`${Api.url}${restOfApi}`,body,{headers:header})
   }
   getMethod(restOfApi:string,headers?:HttpHeaders):Observable<any>{
     if(headers){
@@ -26,7 +26,7 @@ export class ClinetApiService {
   deleteMethod(restOfApi:string):Observable<any>{
     return this.http.delete(`${Api.url}${restOfApi}`)
   }
-  putMethod(restOfApi:string,body:any):Observable<any>{
-    return this.http.put(`${Api.url}${restOfApi}`,body)
+  putMethod(restOfApi:string,body:any,header?:HttpHeaders):Observable<any>{
+    return this.http.put(`${Api.url}${restOfApi}`,body,{headers:header})
   }
 }

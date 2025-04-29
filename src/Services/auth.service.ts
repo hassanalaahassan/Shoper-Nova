@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ClinetApiService } from './clinet-api.service';
 import { LocalstorageService } from './localstorage.service';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ILogin, IRegister, IReset } from '../shared/interfaces/auth';
-import { ISignupResponse, IUser } from '../shared/interfaces/api';
+import { IUser } from '../shared/interfaces/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   currentUser:BehaviorSubject<IUser> = new BehaviorSubject({} as IUser)
+  token:WritableSignal<string> = signal('')
   constructor(
     private clinet:ClinetApiService,
     private local:LocalstorageService,

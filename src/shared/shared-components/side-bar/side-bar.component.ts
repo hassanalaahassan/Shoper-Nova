@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../../Services/cart.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -16,6 +17,7 @@ export class SideBarComponent {
   @ViewChild('sidebar') sideBar:ElementRef = {} as ElementRef
   @ViewChild('toggleBtn') toggleBtn!: ElementRef;
 
+  constructor(public cartService:CartService){}
 
   toggleSidebar():void{
     this.isSideBarOpen = !this.isSideBarOpen

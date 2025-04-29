@@ -5,11 +5,12 @@ import { IProducts, IProductsResponse } from '../../shared/interfaces/products';
 import { ProductCardComponent } from "../../shared/shared-components/product-card/product-card.component";
 import { SearchPipePipe } from '../../shared/Pipes/search-pipe.pipe';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from "../../shared/shared-components/modal/modal.component";
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [HeaderComponent, ProductCardComponent,SearchPipePipe,FormsModule],
+  imports: [HeaderComponent, ProductCardComponent, SearchPipePipe, FormsModule, ModalComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -22,6 +23,8 @@ export class ProductsComponent {
   nextPage:number=0
   prevPage:number=0
   numOfPages:number=0
+  modalVisable:boolean=false
+  product:WritableSignal<IProducts>=signal({} as IProducts)
 
   constructor(private productsService:ProductsService){}
 
@@ -57,5 +60,14 @@ export class ProductsComponent {
     this.currentPage = this.responseOfProducts().metadata.currentPage
     this.nextPage = this.responseOfProducts().metadata.nextPage
     this.numOfPages = this.responseOfProducts().metadata.numberOfPages
+  }
+
+  productToShow(product:IProducts):void{
+    this.product.set(product)
+    this.modalVisable=true
+  }
+  closeModal(bool:boolean):void{
+    this.product.set({}as IProducts)
+    this.modalVisable = bool
   }
 }

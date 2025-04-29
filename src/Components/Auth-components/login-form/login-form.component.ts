@@ -50,6 +50,7 @@ export class LoginFormComponent {
     if (response.message === "success") {
       this.authService.setCurrentUser(response.user)
       this.localstorage.setItemIntoLocalStorage("currentUser",response.user)
+      this.authService.token.set(response.token)
       this.isSend=false
       this.router.navigate(['/home']);
     }
