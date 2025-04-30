@@ -24,10 +24,37 @@ export class ProductsService {
     })
   }
   sortProductsByRating(products:IProducts[]):IProducts[]{
-    return products.sort((a,b)=> b.ratingsAverage - a.ratingsAverage)
+    return [...products].sort((a,b)=> b.ratingsAverage - a.ratingsAverage)
   }
   getProductById(products:IProducts[],id:string):IProducts|undefined{
     return products.find((product)=> product._id === id)
   }
+  filterBy(filterType:string,products:IProducts[]):IProducts[]{
+    if (filterType == 'highPrice') {
+      return this.sortProductsByHighPrice(products)
+    }
+    else if(filterType == 'lowPrice'){
+      return this.sortProductsByLowPrice(products)
+    }
+    else if(filterType == 'topRate'){
+      return this.sortProductsByRating(products)
+    }
+    else if(filterType == 'topRate'){
+      return this.sortProductsByRating(products)
+    }
+    else{
+      return this.filterByCategory(filterType,products)
+    }
+  }
+  sortProductsByHighPrice(products:IProducts[]):IProducts[]{
+    return [...products].sort((a,b)=> b.price - a.price)
+  }
+  sortProductsByLowPrice(products:IProducts[]):IProducts[]{
+    return [...products].sort((a,b)=> a.price - b.price)
+  }
+  filterByCategory(category:string,products:IProducts[]):IProducts[]{
+    return [...products].filter((product)=> product.category.name === category)
+  }
+
 
 }

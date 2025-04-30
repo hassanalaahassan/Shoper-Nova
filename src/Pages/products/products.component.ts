@@ -6,11 +6,13 @@ import { ProductCardComponent } from "../../shared/shared-components/product-car
 import { SearchPipePipe } from '../../shared/Pipes/search-pipe.pipe';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from "../../shared/shared-components/modal/modal.component";
+import { DropDownComponent } from "../../shared/shared-components/drop-down/drop-down.component";
+import { ToastService } from '../../Services/toast.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [HeaderComponent, ProductCardComponent, SearchPipePipe, FormsModule, ModalComponent],
+  imports: [HeaderComponent, ProductCardComponent, SearchPipePipe, FormsModule, ModalComponent, DropDownComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -18,6 +20,7 @@ export class ProductsComponent {
 
   searchTerm:string = ''
   allProducts:WritableSignal<IProducts[]> = signal([])
+  copyOfProducts:WritableSignal<IProducts[]> = signal([])
   responseOfProducts:WritableSignal<IProductsResponse> = signal({metadata:{numberOfPages:0}} as IProductsResponse)
   currentPage:number=0
   nextPage:number=0
@@ -26,12 +29,11 @@ export class ProductsComponent {
   modalVisable:boolean=false
   product:WritableSignal<IProducts>=signal({} as IProducts)
 
-  constructor(private productsService:ProductsService){}
+  constructor(private productsService:ProductsService,private toaster:ToastService){}
 
   ngOnInit(): void {
     this.getAllProducts()
   }
-
 
   getAllProducts():void{
     this.productsService.response.subscribe({
@@ -41,8 +43,9 @@ export class ProductsComponent {
         }
         else{
           this.allProducts.set(response.data)
+          this.copyOfProducts.set(response.data)
           this.responseOfProducts.set(response)
-          this.setPagData()
+          this.setPageData()
         }
       }
     })
@@ -52,11 +55,11 @@ export class ProductsComponent {
       next:(response:IProductsResponse)=>{
         this.allProducts.set(response.data)
         this.responseOfProducts.set(response)
-        this.setPagData()
+        this.setPageData()
       }
     })
   }
-  setPagData():void{
+  setPageData():void{
     this.currentPage = this.responseOfProducts().metadata.currentPage
     this.nextPage = this.responseOfProducts().metadata.nextPage
     this.numOfPages = this.responseOfProducts().metadata.numberOfPages
@@ -69,5 +72,15 @@ export class ProductsComponent {
   closeModal(bool:boolean):void{
     this.product.set({}as IProducts)
     this.modalVisable = bool
+  }
+  filterProducts(filterType:string):void{
+    this.allProducts.set(this.productsService.filterBy(filterType,this.copyOfProducts()))
+    if(this.allProducts().length === 0){
+      this.toaster.error('No Products For This Category')
+      this.allProducts.set(this.copyOfProducts())
+    }
+    else{
+      this.toaster.success(`Products Updated with ${filterType}`)
+    }
   }
 }
