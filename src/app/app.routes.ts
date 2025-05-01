@@ -13,6 +13,7 @@ import { SubCategoriesComponent } from '../Pages/sub-categories/sub-categories.c
 import { ProductDetailesComponent } from '../Pages/product-detailes/product-detailes.component';
 import { ProductsComponent } from '../Pages/products/products.component';
 import { CartComponent } from '../Pages/cart/cart.component';
+import { WishListComponent } from '../Pages/wish-list/wish-list.component';
 
 export const routes: Routes = [
 
@@ -82,7 +83,12 @@ export const routes: Routes = [
       {
         path:'cart',
         component:CartComponent,
-        data:{title:'User Cart'}
+        data:{title:'Cart'}
+      },
+      {
+        path:'wishList',
+        component:WishListComponent,
+        data:{title:'Wish List'}
       },
     ]
   }

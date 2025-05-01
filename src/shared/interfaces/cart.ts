@@ -1,5 +1,4 @@
-import { ICategory, ISubcategory } from "./categories"
-import { IBrand, IProducts } from "./products"
+import { IProducts } from "./products"
 
 export interface ICartResponse {
   status: string

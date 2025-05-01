@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { ProductsService } from '../../../Services/products.service';
 import { IProducts, IProductsResponse } from '../../../shared/interfaces/products';
 import { ProductCardComponent } from "../../../shared/shared-components/product-card/product-card.component";
 import { SlicePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { WishlistService } from '../../../Services/wishlist.service';
+import { IWishListResponse } from '../../../shared/interfaces/wishlist';
 
 @Component({
   selector: 'app-top-products',
@@ -19,7 +20,7 @@ export class TopProductsComponent implements OnInit {
 
   topProducts:IProducts[] = []
 
-  constructor(private productsService:ProductsService){
+  constructor(private productsService:ProductsService,private wishListService:WishlistService){
   }
 
 
@@ -43,4 +44,5 @@ export class TopProductsComponent implements OnInit {
   emitProductToModal(product:IProducts):void{
    this.modalProduct.emit(product)
   }
+
 }

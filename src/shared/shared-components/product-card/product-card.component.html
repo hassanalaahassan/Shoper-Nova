@@ -1,4 +1,4 @@
-<div class="w-full bg-violet-800 rounded-3xl text-neutral-300 flex flex-col items-start justify-center gap-3 transition-all hover:bg-violet-900 hover:shadow-2xl hover:shadow-violet-400">
+<div class="relative w-full bg-violet-800 rounded-3xl text-neutral-300 flex flex-col items-start justify-center gap-3 transition-all hover:bg-violet-900 hover:shadow-2xl hover:shadow-violet-400">
   <div [routerLink]="['/product',product._id]" class="cursor-pointer rounded-2xl w-full">
     <img [src]="product.imageCover" class="size-full max-h-96 rounded-2xl" [alt]="product.title">
   </div>
@@ -26,5 +26,13 @@
       </div>
   </div>
   <button (click)="addItemToCart()" class="bg-violet-700 font-extrabold p-2 px-6 rounded-xl hover:bg-violet-500 transition-colors text-white">Add To Cart</button>
+  </div>
+  <div class="fav absolute z-50 top-0 right-0 bg-violet-900 transition-all bg-opacity-5 hover:bg-opacity-20 p-2 rounded-s-full rounded-br-full">
+    @if (this.wishlistService.isProductInWishLis(product._id)) {
+      <img src="assets/Images/General/Icons/heart-fill.svg" (click)="removeItemFromWishList(product._id)" class="w-9 cursor-pointer" alt="heart">
+    }
+    @else{
+      <img src="assets/Images/General/Icons/heart-angle-svgrepo-com.svg" (click)="addItemToWishList(product._id)" class="w-9 cursor-pointer" alt="heart">
+    }
   </div>
 </div>

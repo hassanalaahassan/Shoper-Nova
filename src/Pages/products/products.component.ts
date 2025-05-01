@@ -54,6 +54,7 @@ export class ProductsComponent {
     this.productsService.getAllProducts(`?page=${page}`).subscribe({
       next:(response:IProductsResponse)=>{
         this.allProducts.set(response.data)
+        this.copyOfProducts.set(response.data)
         this.responseOfProducts.set(response)
         this.setPageData()
       }

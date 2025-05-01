@@ -8,7 +8,6 @@ import { IProducts, IProductsResponse } from '../shared/interfaces/products';
 })
 export class ProductsService {
 
-  // allProducts:BehaviorSubject<IProducts[]> = new BehaviorSubject<IProducts[]>([])
   response:BehaviorSubject<IProductsResponse> = new BehaviorSubject<IProductsResponse>({} as IProductsResponse)
 
   constructor(private clinetApiService:ClinetApiService) {}
