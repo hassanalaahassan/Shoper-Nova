@@ -5,21 +5,38 @@
 />
 @if (cartService.cartResponse().cartId != undefined) {
   <div class="grid grid-cols-12 gap-4">
-    <div class="header col-span-full flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center justify-between">
-        <p>
-          <span class="font-mono font-bold text-violet-800 text-2xl">Cart Price :</span> {{cartService.cartResponse().data.totalCartPrice | currency:'EGY '}}
+    <div class="col-span-full order-last md:order-first md:col-span-9 lg:col-span-8">
+    @for (product of this.cartService.currentCart().products; track product._id) {
+        <div class="w-full" [ngClass]="$index === 0 ? 'mb-3' :'my-3'">
+          <app-cart-card
+            [product]="product"
+          />
+        </div>
+    }
+  </div>
+
+    <div class="col-span-full order-first md:order-last md:col-span-3 lg:col-span-4">
+      <div class="border-secondry-text-color border-2 rounded-xl p-3">
+        <h4 class="text-2xl text-main-color text-center">
+          Cart Summary
+        </h4>
+        <p class="my-4">
+          <span class="font-mono font-bold text-violet-800 text-base lg:text-2xl">Cart Price :</span> {{cartService.cartResponse().data.totalCartPrice | currency:'EGY '}}
         </p>
-        <button (click)="clearCart()" class="bg-main-color px-4 py-2 text-white rounded-xl">
+        <p class="my-4">
+          <span class="font-mono font-bold text-violet-800 text-base lg:text-2xl">Items Count :</span> {{cartService.cartResponse().numOfCartItems}}
+        </p>
+        <p class="my-4">
+          <span class="font-mono font-bold text-violet-800 text-base lg:text-2xl">First Item :</span> {{cartService.cartResponse().data.createdAt | date:'mediumDate' }}
+        </p>
+        <p class="my-4">
+          <span class="font-mono font-bold text-violet-800 text-base lg:text-2xl">Last Update :</span> {{cartService.cartResponse().data.updatedAt| date:'medium' }}
+        </p>
+        <button (click)="clearCart()" class="bg-main-color px-4 py-2 w-full text-white rounded-xl">
           Reset Cart
         </button>
-    </div>
-    @for (product of this.cartService.currentCart().products; track product._id) {
-      <div class="col-span-full">
-        <app-cart-card
-        [product]="product"
-        />
       </div>
-    }
+    </div>
   </div>
 }
 @else {

@@ -3,12 +3,12 @@ import { HeaderComponent } from "../../Components/Home-components/header/header.
 import { ICart, ICartProduct } from '../../shared/interfaces/cart';
 import { CartService } from '../../Services/cart.service';
 import { CartCardComponent } from "../../shared/shared-components/cart-card/cart-card.component";
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [HeaderComponent, CartCardComponent,CurrencyPipe],
+  imports: [HeaderComponent, CartCardComponent,CurrencyPipe,DatePipe,CommonModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

@@ -17,8 +17,13 @@ export class ProductCardComponent {
   @Input() product:IProducts = {} as IProducts
   @Input() isInWishList:boolean = false
 
-  constructor(public wishlistService:WishlistService){}
+  constructor(public wishlistService:WishlistService){
 
+  }
+  ngOnInit(): void {
+    console.log(this.product);
+
+  }
 
   addItemToCart():void{
     this.showProduct.emit(this.product)

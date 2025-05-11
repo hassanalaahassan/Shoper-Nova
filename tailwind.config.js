@@ -13,6 +13,7 @@ module.exports = {
         'btn-color': 'var(--btn-color)',
         'gray-color': 'var(--gray-color)',
       },
+      
     },
   },
   plugins: [
