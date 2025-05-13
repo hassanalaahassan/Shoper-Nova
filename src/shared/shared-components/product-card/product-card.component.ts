@@ -20,10 +20,6 @@ export class ProductCardComponent {
   constructor(public wishlistService:WishlistService){
 
   }
-  ngOnInit(): void {
-    console.log(this.product);
-
-  }
 
   addItemToCart():void{
     this.showProduct.emit(this.product)

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { CategoriesService } from '../../../Services/categories.service';
@@ -14,9 +14,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './main-slider.component.scss'
 })
 export class MainSliderComponent {
+  @Output() showLoader:EventEmitter<boolean> = new EventEmitter()
 
   allCategories:ICategory[] = []
-
   responsiveOptions = [
     {
         breakpoint: '1446px',
@@ -39,14 +39,19 @@ export class MainSliderComponent {
 
   ngOnInit() {
     this.getAllCategoties()
-
   }
 
   getAllCategoties():void{
-    this.categoriesService.subscribtionAllCategories()
+    this.showLoader.emit(true)
     this.categoriesService.allCategories.subscribe({
       next:(response)=>{
+        if(response.length === 0){
+          this.categoriesService.subscribtionAllCategories()
+        }
+        else{
+          this.showLoader.emit(false)
          this.allCategories = response
+        }
       }
     })
 

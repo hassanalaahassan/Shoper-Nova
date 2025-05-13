@@ -6,17 +6,19 @@ import { ProductCardComponent } from "../../../shared/shared-components/product-
 import { SlicePipe } from '@angular/common';
 import { WishlistService } from '../../../Services/wishlist.service';
 import { IWishListResponse } from '../../../shared/interfaces/wishlist';
+import { LoaderComponent } from "../../../shared/shared-components/loader/loader.component";
 
 @Component({
   selector: 'app-top-products',
   standalone: true,
-  imports: [SectionHeaderComponent, ProductCardComponent,SlicePipe],
+  imports: [SectionHeaderComponent, ProductCardComponent, SlicePipe],
   templateUrl: './top-products.component.html',
   styleUrl: './top-products.component.scss'
 })
 export class TopProductsComponent implements OnInit {
 
   @Output() modalProduct:EventEmitter<IProducts> = new EventEmitter()
+  @Output() showLoader:EventEmitter<boolean> = new EventEmitter()
 
   topProducts:IProducts[] = []
 
@@ -29,6 +31,7 @@ export class TopProductsComponent implements OnInit {
   }
 
   getProductsFromSubject():void{
+    this.showLoader.emit(true)
     this.productsService.response.subscribe({
       next:(response:IProductsResponse)=>{
         if(response.data == undefined){
@@ -37,6 +40,7 @@ export class TopProductsComponent implements OnInit {
         else
         {
           this.topProducts = this.productsService.sortProductsByRating(response.data)
+          this.showLoader.emit(false)
         }
       }
     })

@@ -3,12 +3,20 @@
 [subHeader]="'Welcome To Our E-Cart'"
 [subImage]="'assets/Images/General/images/shopping-app.svg'"
 />
-<app-main-slider/>
+<app-main-slider
+(showLoader)="isLoaderShowCategory($event)"
+/>
 <app-top-products
 (modalProduct)="productToShow($event)"
+(showLoader)="isLoaderShowProduct($event)"
 />
 <app-modal
   [product]="product()"
   [visible]="modalVisable"
   (closed)="closeModal($event)"
 />
+@if (showLoaderProduct && showLoadercategory) {
+    <div class="absolute top-0 bottom-0 right-0 left-0 z-50 flex items-center justify-center bg-white">
+      <app-loader/>
+    </div>
+}

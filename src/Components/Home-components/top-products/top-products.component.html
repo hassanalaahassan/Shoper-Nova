@@ -1,23 +1,23 @@
 <section class="grid grid-cols-12 mt-20 gap-4">
-
-  <div class="col-span-full">
-    <app-section-header
-      [header]="'Recomended Products:'"
-    />
-  </div>
-  @for (product of topProducts| slice:0:20; track product._id) {
-    <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
-      <app-product-card
-      [product]="product"
-      (showProduct)="emitProductToModal($event)"
+    <div class="col-span-full">
+      <app-section-header
+        [header]="'Recomended Products:'"
       />
     </div>
-  }
-  @empty {
-    <div class="col-span-full">
-      <h1 class="text-red-500">
-        No Products Found
-      </h1>
-    </div>
-  }
+    @for (product of topProducts| slice:0:20; track product._id) {
+      <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+        <app-product-card
+        [product]="product"
+        (showProduct)="emitProductToModal($event)"
+        />
+      </div>
+    }
+    @empty {
+      <div class="col-span-full">
+        <h1 class="text-red-500 text-center text-3xl font-mono">
+          No Products Found
+        </h1>
+      </div>
+    }
+  
 </section>
