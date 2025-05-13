@@ -5,11 +5,12 @@ import { CategoriesService } from '../../../Services/categories.service';
 import { ICategory } from '../../../shared/interfaces/categories';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { RouterModule } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-main-slider',
   standalone: true,
-  imports: [CarouselModule, ButtonModule, SectionHeaderComponent, RouterModule],
+  imports: [CarouselModule, ButtonModule, SectionHeaderComponent, RouterModule,NgOptimizedImage],
   templateUrl: './main-slider.component.html',
   styleUrl: './main-slider.component.scss'
 })

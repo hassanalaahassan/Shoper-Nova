@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SectionHeaderComponent } from "../../../shared/shared-components/section-header/section-header.component";
 import { ProductsService } from '../../../Services/products.service';
 import { IProducts, IProductsResponse } from '../../../shared/interfaces/products';
@@ -6,7 +6,6 @@ import { ProductCardComponent } from "../../../shared/shared-components/product-
 import { SlicePipe } from '@angular/common';
 import { WishlistService } from '../../../Services/wishlist.service';
 import { IWishListResponse } from '../../../shared/interfaces/wishlist';
-import { LoaderComponent } from "../../../shared/shared-components/loader/loader.component";
 
 @Component({
   selector: 'app-top-products',

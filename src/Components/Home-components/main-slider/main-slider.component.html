@@ -11,7 +11,7 @@
               <div class="p-3 cursor-pointer" [routerLink]="['/category',category._id]">
                 <div class="border border-violet-100 rounded-lg shadow-sm">
                   <a class="rounded-t-lg">
-                      <img class="rounded-xl max-w-56 w-40 h-44 mx-auto p-2" [src]="category.image" [alt]="category.name" />
+                      <img [ngSrc]="category.image" width="482" priority height="400" [alt]="category.name" class="rounded-xl max-w-56 w-40 h-44 mx-auto p-2" />
                   </a>
                   <div class="text-center my-2">
                       <h5 class="md:text-xl tracking-tight text-violet-300">{{category.name}}</h5>
