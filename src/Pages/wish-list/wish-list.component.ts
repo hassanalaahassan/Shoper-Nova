@@ -5,11 +5,12 @@ import { ProductsService } from '../../Services/products.service';
 import { IProducts, IProductsResponse } from '../../shared/interfaces/products';
 import { ProductCardComponent } from "../../shared/shared-components/product-card/product-card.component";
 import { ModalComponent } from "../../shared/shared-components/modal/modal.component";
+import { LoaderComponent } from "../../shared/shared-components/loader/loader.component";
 
 @Component({
   selector: 'app-wish-list',
   standalone: true,
-  imports: [HeaderComponent, ProductCardComponent, ModalComponent],
+  imports: [HeaderComponent, ProductCardComponent, ModalComponent, LoaderComponent],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.scss'
 })
@@ -19,7 +20,7 @@ export class WishListComponent {
   product:WritableSignal<IProducts>=signal({} as IProducts)
   modalVisable:boolean=false
 
-  constructor(private wishlistService:WishlistService){}
+  constructor(public wishlistService:WishlistService){}
 
   ngOnInit(): void {
     this.getWishListProducts()

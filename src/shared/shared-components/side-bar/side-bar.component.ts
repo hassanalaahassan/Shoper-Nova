@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../Services/cart.service';
 import { WishlistService } from '../../../Services/wishlist.service';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -18,7 +19,7 @@ export class SideBarComponent {
   @ViewChild('sidebar') sideBar:ElementRef = {} as ElementRef
   @ViewChild('toggleBtn') toggleBtn!: ElementRef;
 
-  constructor(public cartService:CartService,public wishListService:WishlistService){}
+  constructor(public cartService:CartService,public wishListService:WishlistService,public authService:AuthService){}
 
   toggleSidebar():void{
     this.isSideBarOpen = !this.isSideBarOpen

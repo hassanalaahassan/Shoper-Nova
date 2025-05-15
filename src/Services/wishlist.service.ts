@@ -15,6 +15,7 @@ export class WishlistService {
   wishList:WritableSignal<IWishListResponse>=signal({}as IWishListResponse)
   productsIdWishList:WritableSignal<string[]>=signal([])
   wishListProducts:BehaviorSubject<IProducts[]> = new BehaviorSubject<IProducts[]>([])
+  showLoader:WritableSignal<boolean> = signal(false)
   constructor(
     private clinet:ClinetApiService,
     private authService:AuthService
@@ -44,12 +45,14 @@ export class WishlistService {
     return this.clinet.getMethod(`wishlist`,headers)
   }
   subscribeForGetWishList():void{
+    this.showLoader.set(true)
     this.getWishList().subscribe({
       next:(response:IWishListResponse)=>{
         this.wishList.set(response)
         this.wishListProducts.next(response.data)
         const id = response.data.map((product:IProducts)=> product._id)
         this.productsIdWishList.set(id)
+        this.showLoader.set(false)
       }
     })
   }

@@ -44,12 +44,18 @@
                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-violet-50 bg-secondry-text-color rounded-full">{{wishListService.productsIdWishList() != undefined ? wishListService.productsIdWishList().length : '0'}}</span>
             </a>
          </li>
-         <li>
+         <li (click)="authService.logOut()" class="cursor-pointer">
             <a  class="flex items-center p-2 text-secondry-text-color rounded-lg transition-all hover:bg-hover-color group">
-               <svg class="shrink-0 w-5 h-5 text-secondry-text-color transition duration-75 group-hover:text-secondry-text-color" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+               <img src="assets/Images/General/Icons/orders.svg" class="shrink-0 w-5 h-5 text-secondry-text-color transition duration-75 group-hover:text-secondry-text-color rotate-180" alt="">
+               <span class="flex-1 ms-3 whitespace-nowrap">Orders</span>
+            </a>
+         </li>
+         <li (click)="authService.logOut()" class="cursor-pointer">
+            <a  class="flex items-center p-2 text-secondry-text-color rounded-lg transition-all hover:bg-hover-color group">
+               <svg class="shrink-0 w-5 h-5 text-secondry-text-color transition duration-75 group-hover:text-secondry-text-color rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
+               <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
             </a>
          </li>
          <li>

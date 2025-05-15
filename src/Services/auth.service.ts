@@ -5,6 +5,7 @@ import { LocalstorageService } from './localstorage.service';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ILogin, IRegister, IReset } from '../shared/interfaces/auth';
 import { IUser } from '../shared/interfaces/api';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private clinet:ClinetApiService,
     private local:LocalstorageService,
+    private router:Router
   ) {
     this.checkLocalStorage()
   }
@@ -51,6 +53,13 @@ export class AuthService {
       this.setCurrentUser(this.local.getItemIntoLocalStorage("currentUser"))
     }
   }
+  logOut():void{
+    this.currentUser.next({} as IUser)
+    this.local.removeItemFormLocalStorage('currentUser')
+    this.router.navigate(['/login'])
+
+  }
+
   matchPasswords(passwordField: string, confirmField: string): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const password = formGroup.get(passwordField)?.value;
